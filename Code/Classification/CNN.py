@@ -47,7 +47,7 @@ def load_images(folder):
 
 # Loading the train images and their corresponding labels
 
-path='/ISL Datasets/Train-Test/Train'
+path='/ISLDatasets/Train-Test/Test'
 train_data=load_images(path)
 
 from google.colab import drive
@@ -55,7 +55,7 @@ drive.mount('/content/drive')
 
 # Loading the test images and their corresponding labels
 
-path='ISL Datasets/Train-Test/Test'
+path='ISLDatasets/Train-Test/Test'
 test_data=load_images(path)
 
 # Shuffling the data
@@ -176,7 +176,7 @@ plt.title('Accuracy Curves',fontsize=16)
 
 import pickle
 
-file_name='/Saved Files/CNN'
+file_name='/SavedFiles/CNN'
 outfile=open(file_name,'wb')
 pickle.dump(model,outfile)
 outfile.close()

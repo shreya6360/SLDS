@@ -23,7 +23,7 @@ def rr_main():
         plt.pause(2)
         plt.close
 
-    path=('Reverse sign images//')
+    path=('Reversesignimages//')
     voice=sr.Recognizer()
     text=[]
     with sr.Microphone() as source:

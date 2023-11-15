@@ -150,7 +150,7 @@ def cd_main():
 
 
             if cur_mode!=-1 and cur_mode!=255 and cur_mode is not None:
-                file_path = 'Saved Dataset\\'+str(chr(cur_mode))
+                file_path = 'SavedDataset\\'+str(chr(cur_mode))
                 if not path.exists(file_path):
                     os.makedirs(file_path)
                 if(count<=limit):

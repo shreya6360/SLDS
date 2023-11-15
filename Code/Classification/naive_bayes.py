@@ -21,7 +21,7 @@ from sklearn.preprocessing import LabelEncoder
 import seaborn as sbn
 from sklearn.metrics import confusion_matrix
 
-data=pd.read_csv('cnn files/train.csv',low_memory=False)
+data=pd.read_csv('csvfiles/train.csv',low_memory=False)
 data.head()
 
 x=data.iloc[:,0:150]
@@ -35,7 +35,7 @@ print("Naive Bayes Started!")
 GaussNB.fit(x,y)
 print("Naive Bayes Finished !")
 
-test=pd.read_csv('cnn files/test.csv',low_memory=False)
+test=pd.read_csv('csvfiles/test.csv',low_memory=False)
 
 x_test=test.iloc[:,0:150]
 y_test=test.iloc[:,-1]
