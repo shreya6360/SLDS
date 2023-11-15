@@ -73,7 +73,7 @@ def create_histogram(all_bows,kmeans):
     print(key," Completed!")
   return features_dict
 
-test_folder='ISL Datasets/Train-Test/Test'
+test_folder='Preprocessing/ISLDatasets/Train-Test/Test'
 
 # Loading Test images
 test_images=load_images_by_category(test_folder)
@@ -87,7 +87,7 @@ surf_test=surf_features(test_images)[1]
 bows_test=create_histogram(surf_test,kmeans)
 
 import csv
-loc='cnn files/test.csv'
+loc='Classification/csvfiles/test.csv'
 with open(loc,'w',newline='') as file:
   writer=csv.writer(file)
   header=[]
