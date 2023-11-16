@@ -25,7 +25,7 @@ clustering_factor=6
 def surf_features(images):
   surf_vectors_list={}
   surf_descriptors_list=[]
-  surf=cv2.xfeatures2d.SURF_create()
+  surf = cv2.SURF_create()
   for key,value in images.items():
     print(key, "Started")
     features=[]
