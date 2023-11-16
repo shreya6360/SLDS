@@ -176,8 +176,23 @@ plt.title('Accuracy Curves',fontsize=16)
 
 import pickle
 
-file_name='/SavedFiles/CNN'
-outfile=open(file_name,'wb')
-pickle.dump(model,outfile)
+# ... (previous code remains unchanged)
+
+# Specify the correct full path or relative path where you want to save the model
+file_path = '/content/drive/MyDrive/SavedFiles/CNN_model.pkl'
+
+# Open the file in binary write mode
+with open(file_path, 'wb') as outfile:
+    pickle.dump(model, outfile)
+
+# Print a message indicating that the model has been saved
+print(f"Model saved successfully at: {file_path}")
+
+# Load the saved model
+with open(file_path, 'rb') as infile:
+    loaded_model = pickle.load(infile)
+
+# Now you can use the loaded_model for predictions or further training
+
 outfile.close()
 
