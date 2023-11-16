@@ -47,7 +47,7 @@ def load_images(folder):
 
 # Loading the train images and their corresponding labels
 
-path='/ISLDatasets/Train-Test/Test'
+path='/Preprocessing/ISLDatasets/Train-Test/Train'
 train_data=load_images(path)
 
 from google.colab import drive
@@ -55,7 +55,7 @@ drive.mount('/content/drive')
 
 # Loading the test images and their corresponding labels
 
-path='ISLDatasets/Train-Test/Test'
+path='/Preprocessing/ISLDatasets/Train-Test/Test'
 test_data=load_images(path)
 
 # Shuffling the data
