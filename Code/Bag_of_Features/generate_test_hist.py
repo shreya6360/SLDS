@@ -30,7 +30,7 @@ def surf_features(images):
     print(key, "Started")
     features=[]
     for img in value:
-      kp,desc=surf.detectAndCompute(img,None)
+      kp, desc = orb.detectAndCompute(img, None)
       surf_descriptors_list.extend(desc)
       features.append(desc)
     surf_vectors_list[key]=features
