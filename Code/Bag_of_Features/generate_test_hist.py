@@ -18,21 +18,27 @@ from sklearn.cluster import MiniBatchKMeans
 n_classes = 36
 clustering_factor = 6
 
-def orb_features(images):
-    orb_vectors_list = {}
-    orb_descriptors_list = []
-    orb = cv2.ORB_create()
+def surf_features(images):
+    surf_vectors_list = {}
+    surf_descriptors_list = []
+    surf = cv2.xfeatures2d.SURF_create()
     for key, value in images.items():
         print(key, "Started")
         features = []
         for img in value:
-            kp, desc = orb.detectAndCompute(img, None)
+            kp, desc = surf.detectAndCompute(img, None)
             if desc is not None:
-                orb_descriptors_list.extend(desc)
+                surf_descriptors_list.extend(desc)
                 features.append(desc)
-        orb_vectors_list[key] = features
+        surf_vectors_list[key] = features
         print(key, " Completed!")
-    return [orb_descriptors_list, orb_vectors_list]
+    return [surf_descriptors_list, surf_vectors_list]
+
+def train_kmeans(descriptors, k):
+    kmeans = MiniBatchKMeans(n_clusters=k, random_state=42)
+    kmeans.fit(descriptors)
+    visual_words = kmeans.cluster_centers_
+    return visual_words, kmeans
 
 # Loading train images into dictionaries which holds all images category by category
 
@@ -72,30 +78,30 @@ test_folder = 'Code/Preprocessing/ISLDatasets/Train-Test/Test'
 # Load train images
 train_images = load_images_by_category(train_folder)
 
-# Extracting ORB features from each image stored in train_images list
-orbs = orb_features(train_images)
-all_train_descriptors = orbs[0]
-train_descriptors_by_class = orbs[1]
+# Extracting SURF features from each image stored in train_images list
+surfs = surf_features(train_images)
+all_train_descriptors = surfs[0]
+train_descriptors_by_class = surfs[1]
 
 # Train the KMeans model
 visual_words, kmeans = train_kmeans(all_train_descriptors, n_classes * clustering_factor)
 
 # Save the trained KMeans model for later use
-with open('/content/drive/MyDrive/SavedFiles/kmeans_model_orb.pkl', 'wb') as kmeans_file:
+with open('/content/drive/MyDrive/SavedFiles/kmeans_model_surf.pkl', 'wb') as kmeans_file:
     pickle.dump(kmeans, kmeans_file)
 
 # Load test images
 test_images = load_images_by_category(test_folder)
 
 # Load the trained KMeans model for testing
-with open('/content/drive/MyDrive/SavedFiles/kmeans_model_orb.pkl', 'rb') as kmeans_file:
+with open('/content/drive/MyDrive/SavedFiles/kmeans_model_surf.pkl', 'rb') as kmeans_file:
     kmeans = pickle.load(kmeans_file)
 
-# Extract ORB features from the test images
-orb_test = orb_features(test_images)[1]
+# Extract SURF features from the test images
+surf_test = surf_features(test_images)[1]
 
-# Create histograms from extracted ORB features
-bows_test = create_histogram(orb_test, kmeans)
+# Create histograms from extracted SURF features
+bows_test = create_histogram(surf_test, kmeans)
 
 import csv
 loc = 'Code/Classification/csvfiles/test.csv'
