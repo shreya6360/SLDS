@@ -51,7 +51,7 @@ path='Code/Preprocessing/ISLDatasets/Train-Test/Train'
 train_data=load_images(path)
 
 from google.colab import drive
-drive.mount('/content/drive')
+drive.mount('/content/drive', force_remount=True)
 
 # Loading the test images and their corresponding labels
 
